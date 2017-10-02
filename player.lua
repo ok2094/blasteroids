@@ -5,7 +5,16 @@ player = {
   yvel = 0,
   rotation = 0,
   angaccel = 4,
-  accel = 400
+  accel = 400,
+  cd = 0.1,
+  currentcd = 0
+}
+playermodel = {
+  -20, -20,
+  20, 0,
+  -20, 20,
+  -5, 0,
+  -20, -20,
 }
 
 function player_update(dt)
@@ -49,8 +58,7 @@ function player_draw()
 	love.graphics.setColor(255, 255, 255)
 	love.graphics.translate(player.x, player.y)
 	love.graphics.rotate(player.rotation)
-	love.graphics.line(-20, -20, 20, 0)
-	love.graphics.line(-20, 20, 20, 0)
-	love.graphics.line(-20, -20, -5, 0)
-	love.graphics.line(-20, 20, -5, 0)
+  love.graphics.setLineWidth(2)
+  love.graphics.setLineJoin("miter")
+  love.graphics.line(playermodel)
 end
