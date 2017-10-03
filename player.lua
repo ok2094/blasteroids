@@ -6,16 +6,26 @@ player = {
   rotation = 0,
   angaccel = 4,
   accel = 400,
-  cd = 0.1,
+  cd = 0.2,
   currentcd = 0
 }
 playermodel = {
-  -20, -20,
-  20, 0,
-  -20, 20,
-  -5, 0,
-  -20, -20,
+  -28, -18,
+  12, 2,
+  -28, 22,
+  -12, 2,
+  -28, -18,
 }
+
+function player_load()
+  playercanvas = love.graphics.newCanvas(44, 55)
+  love.graphics.setCanvas(playercanvas)
+  love.graphics.setLineWidth(2)
+  love.graphics.setLineJoin("miter")
+  love.graphics.setColor(255, 255, 255)
+  love.graphics.line(playermodel)
+  love.graphics.setCanvas()
+end
 
 function player_update(dt)
 	--turning
@@ -41,24 +51,17 @@ function player_update(dt)
   player.xvel = player.xvel * 0.99
   player.yvel = player.yvel * 0.99
 
-  local wrapBorder = 0
+  local wrapBorder = 30
   local wrapZone = {
     x = -wrapBorder,
     y = -wrapBorder,
     w = love.graphics.getWidth() + wrapBorder*2,
     h = love.graphics.getHeight() + wrapBorder*2,
   }
-
   player.x = ((player.x - wrapZone.x) % wrapZone.w) + wrapZone.x
-
   player.y = ((player.y - wrapZone.y) % wrapZone.h) + wrapZone.y
 end
 
 function player_draw()
-	love.graphics.setColor(255, 255, 255)
-	love.graphics.translate(player.x, player.y)
-	love.graphics.rotate(player.rotation)
-  love.graphics.setLineWidth(2)
-  love.graphics.setLineJoin("miter")
-  love.graphics.line(playermodel)
+  love.graphics.draw(playercanvas, player.x, player.y, player.rotation, 1, 1, 30, 30)
 end
