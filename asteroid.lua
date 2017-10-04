@@ -8,7 +8,7 @@ asteroidBigModel = {
   -25, 14,
   -30, -25,
 }
-asteroidTimerMax = 1
+asteroidTimerMax = 0.3
 asteroidTimer = asteroidTimerMax
 asteroidBig = { }
 dead_asteroidBig = { }
@@ -28,9 +28,33 @@ function asteroid_update(dt)
   asteroidTimer = asteroidTimer - (1 * dt)
   if asteroidTimer < 0 then
     asteroidTimer = asteroidTimerMax
-    rndh = love.math.random(10, love.graphics.getHeight() - 10)
-    rndw = love.math.random(10, love.graphics.getWidth() - 10)
-    rndr = love.math.random(0, 360)
+    --where to spawn
+    where = love.math.random(1, 4)
+    if where == 1 then
+      --left
+      rndh = love.math.random(-30, love.graphics.getHeight() + 30)
+      rndw = -30
+      rndr = love.math.random(0, 3)
+    elseif where == 2 then
+      --right
+      rndh = love.math.random(-30, love.graphics.getHeight() + 30)
+      rndw = love.graphics.getWidth() + 30
+      rndr = love.math.random(3, 6)
+    elseif where == 3 then
+      --top
+      rndh = -30
+      rndw = love.math.random(-30, love.graphics.getWidth() + 30)
+      rndr = love.math.random(1.5, 4.5)
+    else
+      --bottom
+      rndh = love.graphics.getHeight() + 30
+      rndw = love.math.random(-30, love.graphics.getWidth() + 30)
+      if love.math.random(0, 1) == 1 then
+        rndr = love.math.random(4.5, 6)
+      else
+        rndr = love.math.random(0, 1.5)
+      end
+    end
     rndrs = love.math.random(0, 5)
 
     if #dead_asteroidBig > 0 then
@@ -50,8 +74,8 @@ function asteroid_update(dt)
 
   for i = #asteroidBig, 1, -1 do
   local b = asteroidBig[i]
-  if (b.x < -30) or (b.x > love.graphics.getWidth() + 30)
-  or (b.y < -30) or (b.y > love.graphics.getHeight() + 30) then
+  if (b.x < -40) or (b.x > love.graphics.getWidth() + 40)
+  or (b.y < -40) or (b.y > love.graphics.getHeight() + 40) then
     table.insert(dead_asteroidBig, table.remove(asteroidBig, i))
   end
   end

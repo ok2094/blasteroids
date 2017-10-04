@@ -5,7 +5,7 @@ player = {
   yvel = 0,
   rotation = 0,
   angaccel = 4,
-  accel = 400,
+  accel = 300,
   cd = 0.2,
   currentcd = 0
 }
