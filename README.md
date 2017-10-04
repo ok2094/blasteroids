@@ -1,2 +1,3 @@
 # blasteroids
-asteroid clone in lua with löve
+bad asteroid clone in lua with löve
+my first löve project
