@@ -7,9 +7,9 @@ function collision_update()
   --collision detection
   for i, ab in ipairs(asteroidBig) do
 	for j, b in ipairs(bullets) do
-		if CheckCollision(ab.x, ab.y, asteroidCanvas:getWidth(), asteroidCanvas:getHeight(), b.x, b.y, bulletcanvas:getWidth(), bulletcanvas:getHeight()) then
+		if CheckCollision(ab.x, ab.y, asteroidBigCanvas:getWidth(), asteroidBigCanvas:getHeight(), b.x, b.y, bulletcanvas:getWidth(), bulletcanvas:getHeight()) then
 			table.insert(dead_bullets, table.remove(bullets, j))
-			table.insert(dead_asteroidBig, table.remove(asteroidBig, i))
+			asteroidBigDies(i, true, ab)
       score = score + 1
 		end
 	end
